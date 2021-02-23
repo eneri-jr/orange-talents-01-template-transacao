@@ -1,5 +1,9 @@
 package br.com.zup.transacao.Kafka.Eventos;
 
+import br.com.zup.transacao.Transacao.Cartao.CartaoRepository;
+import br.com.zup.transacao.Transacao.Estabelecimento.EstabelecimentoRepository;
+import br.com.zup.transacao.Transacao.Transacao;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -31,14 +35,7 @@ public class EventoTransacao {
         return efetivadaEm;
     }
 
-    @Override
-    public String toString() {
-        return "EventoTransacao{" +
-                "id='" + id + '\'' +
-                ", valor=" + valor +
-                ", estabelecimento=" + estabelecimento +
-                ", cartao=" + cartao +
-                ", efetivadaEm=" + efetivadaEm +
-                '}';
+    public Transacao toModel(EstabelecimentoRepository estabelecimentoRepository, CartaoRepository cartaoRepository) {
+        return new Transacao(id, valor, estabelecimento.toModel(estabelecimentoRepository), cartao.toModel(cartaoRepository), efetivadaEm);
     }
 }

@@ -1,7 +1,9 @@
 package br.com.zup.transacao.Kafka.Eventos;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import br.com.zup.transacao.Transacao.Cartao.Cartao;
+import br.com.zup.transacao.Transacao.Cartao.CartaoRepository;
+
+import java.util.List;
 
 public class EventoCartao {
 
@@ -16,11 +18,14 @@ public class EventoCartao {
         return email;
     }
 
-    @Override
-    public String toString() {
-        return "EventoCartao{" +
-                "id='" + id + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+    public Cartao toModel(CartaoRepository cartaoRepository) {
+
+        List<Cartao> possivelCartao = cartaoRepository.findByCartao(id);
+
+        if(possivelCartao.isEmpty()) {
+            return new Cartao(id, email);
+        }
+        return possivelCartao.get(0);
+
     }
 }
