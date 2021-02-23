@@ -1,5 +1,10 @@
 package br.com.zup.transacao.Kafka.Eventos;
 
+import br.com.zup.transacao.Transacao.Estabelecimento.Estabelecimento;
+import br.com.zup.transacao.Transacao.Estabelecimento.EstabelecimentoRepository;
+
+import java.util.List;
+
 public class EventoEstabelecimento {
 
     private String nome;
@@ -18,12 +23,11 @@ public class EventoEstabelecimento {
         return endereco;
     }
 
-    @Override
-    public String toString() {
-        return "EventoEstabelecimento{" +
-                "nome='" + nome + '\'' +
-                ", cidade='" + cidade + '\'' +
-                ", endereco='" + endereco + '\'' +
-                '}';
+    public Estabelecimento toModel(EstabelecimentoRepository estabelecimentoRepository) {
+        List<Estabelecimento> possivelEstabelecimento = estabelecimentoRepository.findByEstabelecimento(nome, cidade, endereco);
+        if(possivelEstabelecimento.isEmpty()) {
+            return new Estabelecimento(nome, cidade, endereco);
+        }
+        return possivelEstabelecimento.get(0);
     }
 }
