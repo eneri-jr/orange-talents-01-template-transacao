@@ -23,19 +23,19 @@ public class Transacao {
     @JoinColumn(name = "cartao_id")
     private Cartao cartao;
 
-    private LocalDate efetivdadaEm;
+    private LocalDate efetivadaEm;
 
     @Deprecated
     public Transacao() {
 
     }
 
-    public Transacao(String id, BigDecimal valor, Estabelecimento estabelecimento, Cartao cartao, LocalDate efetivdadaEm) {
+    public Transacao(String id, BigDecimal valor, Estabelecimento estabelecimento, Cartao cartao, LocalDate efetivadaEm) {
         this.id = id;
         this.valor = valor;
         this.estabelecimento = estabelecimento;
         this.cartao = cartao;
-        this.efetivdadaEm = efetivdadaEm;
+        this.efetivadaEm = efetivadaEm;
     }
 
     public String getId() {
@@ -54,7 +54,7 @@ public class Transacao {
         return cartao;
     }
 
-    public LocalDate getEfetivdadaEm() {
-        return efetivdadaEm;
+    public LocalDate getEfetivadaEm() {
+        return efetivadaEm;
     }
 }
